@@ -41,10 +41,17 @@ def start_menu():
     print('Starting timer...')
     while True:
         startup_time = datetime.now()
-        stop = input('Press enter to stop the timer')
-        total_time = datetime.now() - startup_time
 
-        write_today(total_time)
+        stop = input('Press enter to stop the timer')
+        elapsed_time = datetime.now() - startup_time
+
+        print(f'Elapsed time: {elapsed_time}')
+        focused_multiplier = int(input('On a scale of 0 to 10, how focused were you during those time:'))/10
+        final_elapsed_time_in_seconds = focused_multiplier * elapsed_time.total_seconds()
+        final_elapsed_time = timedelta(seconds=final_elapsed_time_in_seconds)
+
+        write_today(final_elapsed_time)
+        print(f'{final_elapsed_time} has been written to {today}.txt')
 
         continue_execution = input('Press [Y] to start a new timer or any other key to stop: ').upper()
         if continue_execution != 'Y':
